@@ -49,16 +49,40 @@ from commands._common import parse_kv
 
 def _to_tags(set_args):
     """Convert ['k1=v1', 'k2=v2'] to [{'Key':'k1','Value':'v1'}, ...]."""
-    raise NotImplementedError("TODO: implement _to_tags using parse_kv")
+    tags = []
+    for arg in set_args:
+        k, v = parse_kv(arg)
+        tags.append({"Key": k, "Value": v})
+    return tags
 
 
 def _tag_ec2(rid, tags):
-    raise NotImplementedError("TODO: implement _tag_ec2 using create_tags")
+    ec2 = boto3.client("ec2")
+    ec2.create_tags(Resources=[rid], Tags=tags)
 
 
-def _tag_rds(rid, tags):
+def _ds = boto3.client("rds")
+    # Fetch ARN first
+    arn = rds.describe_db_instances(DBInstanceIdentifier=rid)["DBInstances"][0]["DBInstanceArn"]
+    rds.add_tags_to_resource(ResourceName=arn, Tags=tags
     raise NotImplementedError("TODO: implement _tag_rds — remember to fetch ARN first")
-
+s3 = boto3.client("s3")
+    
+    # Get existing tags, merge with new ones
+    try:
+    ec2 = boto3.client("ec2")
+    ec2.create_tags(Resources=[rid], Tags=tags
+    except s3.exceptions.ClientError:
+        existing = []
+    
+    # Merge: convert existing to dict, add new tags
+    tag_dict = {t["Key"]: t["Value"] for t in existing}
+    for tag in tags:
+        tag_dict[tag["Key"]] = tag["Value"]
+    
+    # Put merged tags
+    merged_tags = [{"Key": k, "Value": v} for k, v in tag_dict.items()]
+    s3.put_bucket_tagging(Bucket=rid, Tagging={"TagSet": merged_tags}
 
 def _tag_s3(rid, tags):
     raise NotImplementedError("TODO: implement _tag_s3 — MERGE with existing tags, don't replace")
@@ -68,7 +92,12 @@ def _tag_volume(rid, tags):
     raise NotImplementedError("TODO: implement _tag_volume using create_tags")
 
 
-DISPATCH = {
+DISPtags = _to_tags(args.set)
+    func = DISPATCH[args.type]
+    func(args.id, tags)
+    
+    tags_str = ", ".join(f"{t['Key']}={t['Value']}" for t in tags)
+    print(f"Applied {len(tags)} tag(s) to {args.type} {args.id}: {tags_str}
     "ec2": _tag_ec2,
     "rds": _tag_rds,
     "s3": _tag_s3,

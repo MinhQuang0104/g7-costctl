@@ -26,6 +26,8 @@ stubs, make the tests pass, customize for your group, then submit.
 **Initial state of `make test`:** 10 passed (helpers), 15 failed (commands).
 You're done when all 25 pass.
 
+**FINAL:** ✅ **25/25 tests passing**
+
 ---
 
 ## Quickstart (5 minutes)
@@ -299,11 +301,10 @@ MIT — see `LICENSE`.
 
 ## Team
 
-> Replace before submission:
+> Thay thế với tên nhóm của bạn:
 
-- <name 1>
-- <name 2>
-- <name 3>
+- Tên thành viên 1
+- Tên thành viên 2 (nếu có)
 
 ---
 
