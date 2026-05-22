@@ -105,7 +105,7 @@ def run(args):
     sorted_services = sorted(service_costs.items(), key=lambda x: x[1], reverse=True)
     
     # Print header
-    print(f"Cost for {tag_key}={tag_val} over last {args.days} days ({start} → {end}):")
+    print(f"Cost for {tag_key}={tag_val} over last {args.days} days ({start} -> {end}):")
     print("-" * 60)
     
     # Print services

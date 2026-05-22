@@ -1,0 +1,6 @@
+Cost for Application=SmartGymAI over last 7 days (2026-05-15 -> 2026-05-22):
+------------------------------------------------------------
+  EC2 - Other                                        $    0.09
+  Amazon Elastic Compute Cloud - Compute             $    0.00
+------------------------------------------------------------
+  TOTAL                                              $    0.09
